@@ -1,6 +1,6 @@
 {
   "name": "expo-svg-transformer",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "SVG transformer for react-native - fork of kristerkari",
   "main": "index.js",
   "repository": "https://github.com/christophehurpeau/expo-svg-transformer",
