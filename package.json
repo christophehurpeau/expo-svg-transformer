@@ -1,9 +1,9 @@
 {
-  "name": "@ornikar/react-native-svg-transformer",
-  "version": "1.0.3",
+  "name": "expo-svg-transformer",
+  "version": "2.0.0",
   "description": "SVG transformer for react-native - fork of kristerkari",
   "main": "index.js",
-  "repository": "https://github.com/ornikar/react-native-svg-transformer",
+  "repository": "https://github.com/christophehurpeau/expo-svg-transformer",
   "scripts": {
     "release": "npmpub",
     "precommit": "lint-staged",

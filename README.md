@@ -1,6 +1,7 @@
-# react-native-svg-transformer [![NPM version](http://img.shields.io/npm/v/react-native-svg-transformer.svg)](https://www.npmjs.org/package/react-native-svg-transformer) [![Downloads per month](https://img.shields.io/npm/dm/react-native-svg-transformer.svg)](http://npmcharts.com/compare/react-native-svg-transformer?periodLength=30) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github)
+# expo-svg-transformer [![NPM version](http://img.shields.io/npm/v/expo-svg-transformer.svg)](https://www.npmjs.org/package/expo-svg-transformer) [![Downloads per month](https://img.shields.io/npm/dm/expo-svg-transformer.svg)](http://npmcharts.com/compare/react-native-svg-transformer?periodLength=30) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github)
 
 <a href="https://facebook.github.io/react-native/"><img src="images/react-native-logo.png" width="160"></a><img src="images/plus.svg" width="100"><img src="images/svg-logo.svg" width="160">
+
 
 React Native SVG transformer allows you to import SVG files in your React Native project the same way that you would in a Web application when using a library like [SVGR](https://github.com/gregberge/svgr/tree/main/packages/webpack) to transform your imported SVG images into React components.
 
@@ -8,8 +9,7 @@ This makes it possible to use the same code for React Native and Web.
 
 ## Fork
 
-- updated version of svgr
-- delete plugin svgo as we do this via lint-staged
+[Fork of react-native-svg-transformer](https://github.com/kristerkari/react-native-svg-transformer). Works only with expo and optimizations are removed, use in combination of something like [imagemin-lint-staged](https://www.npmjs.com/package/imagemin-lint-staged) or manually optimize svgs.
 
 ## Usage
 
@@ -38,10 +38,10 @@ Make sure that you have installed the `react-native-svg` library:
 
 - https://github.com/react-native-community/react-native-svg#installation
 
-### Step 2: Install react-native-svg-transformer library
+### Step 2: Install expo-svg-transformer library
 
 ```sh
-yarn add --dev react-native-svg-transformer
+yarn add --dev expo-svg-transformer
 ```
 
 ### Step 3: Configure the react native packager
@@ -62,7 +62,7 @@ module.exports = (() => {
 
   config.transformer = {
     ...transformer,
-    babelTransformerPath: require.resolve("react-native-svg-transformer"),
+    babelTransformerPath: require.resolve("expo-svg-transformer"),
   };
   config.resolver = {
     ...resolver,
@@ -74,44 +74,20 @@ module.exports = (() => {
 })();
 ```
 
----
-
-#### For React Native v0.59 or newer
-
-Merge the contents from your project's `metro.config.js` file with this config (create the file if it does not exist already).
-
-`metro.config.js`:
-
-```js
-const { getDefaultConfig } = require("metro-config");
-
-module.exports = (async () => {
-  const {
-    resolver: { sourceExts, assetExts }
-  } = await getDefaultConfig();
-  return {
-    transformer: {
-      babelTransformerPath: require.resolve("react-native-svg-transformer")
-    },
-    resolver: {
-      assetExts: assetExts.filter(ext => ext !== "svg"),
-      sourceExts: [...sourceExts, "svg"]
-    }
-  };
-})();
-```
-
 ### Using TypeScript
 
 If you are using TypeScript, you need to add this to your `declarations.d.ts` file (create one if you don't have one already, but don't put in the root folder of your project):
 
 ```ts
-declare module "*.svg" {
-  import React from 'react';
-  import { SvgProps } from "react-native-svg";
-  const content: React.FC<SvgProps>;
-  export default content;
+declare module '*.svg' {
+  import * as React from 'react';
+
+  export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string }>;
+
+  const src: string;
+  export default src;
 }
+
 ```
 
 ### Configuring SVGR (how SVG images get transformed)
