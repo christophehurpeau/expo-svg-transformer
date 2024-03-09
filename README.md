@@ -16,7 +16,9 @@ This makes it possible to use the same code for React Native and Web.
 Import your `.svg` file inside a React component:
 
 ```jsx
-import Logo from "./logo.svg";
+import { ReactComponent as Logo } from "./logo.svg";
+// or
+import Logo from "./logo.inline.svg";
 ```
 
 You can then use your image as a component:
