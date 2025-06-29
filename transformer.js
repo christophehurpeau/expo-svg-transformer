@@ -1,6 +1,4 @@
 const { transform } = require("@svgr/core");
-// const { resolveConfig, transform } = require("@svgr/core");
-// const resolveConfigDir = require("path-dirname");
 
 const defaultSVGRConfig = {
   native: true,

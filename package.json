@@ -18,8 +18,8 @@
     "README.md"
   ],
   "dependencies": {
-    "@svgr/core": "^6.1.2",
-    "path-dirname": "^1.0.2"
+    "@svgr/core": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0"
   },
   "peerDependencies": {
     "react-native": ">=0.59.0",
