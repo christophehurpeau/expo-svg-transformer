@@ -48,7 +48,6 @@ yarn add --dev expo-svg-transformer
 
 ### Step 3: Configure the react native packager
 
-#### For Expo SDK v41.0.0 or newer
 
 Merge the contents from your project's `metro.config.js` file with this config (create the file if it does not exist already).
 
@@ -57,23 +56,8 @@ Merge the contents from your project's `metro.config.js` file with this config (
 ```js
 const { getDefaultConfig } = require("expo/metro-config");
 
-module.exports = (() => {
-  const config = getDefaultConfig(__dirname);
-
-  const { transformer, resolver } = config;
-
-  config.transformer = {
-    ...transformer,
-    babelTransformerPath: require.resolve("expo-svg-transformer"),
-  };
-  config.resolver = {
-    ...resolver,
-    assetExts: resolver.assetExts.filter((ext) => ext !== "svg"),
-    sourceExts: [...resolver.sourceExts, "svg"],
-  };
-
-  return config;
-})();
+const config = getDefaultConfig(__dirname);
+module.exports = withExpoSvgTransformer(config);
 ```
 
 ### Using TypeScript

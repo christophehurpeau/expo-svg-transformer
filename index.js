@@ -1,28 +1,19 @@
-const { transform } = require("@svgr/core");
-// const { resolveConfig, transform } = require("@svgr/core");
-// const resolveConfigDir = require("path-dirname");
-const upstreamTransformer = require("@expo/metro-config/babel-transformer");
+module.exports.withExpoSvgTransformer = (config) => {
+  const originalMetroConfigTransformPath =
+    config.transformer.babelTransformerPath;
 
-const defaultSVGRConfig = {
-  native: true,
-  plugins: ["@svgr/plugin-jsx"]
-};
-
-module.exports.transform = async ({ src, filename, options }) => {
-  if (filename.endsWith(".svg")) {
-    // const config = await resolveConfig(resolveConfigDir(filename));
-    // let svgrConfig = config
-    //  ? { ...defaultSVGRConfig, ...config }
-    //  : defaultSVGRConfig;
-    let svgrConfig = defaultSVGRConfig;
-    if (!filename.endsWith(".inline.svg")) {
-      svgrConfig = { ...svgrConfig, exportType: "named" };
+  return {
+    ...config,
+    transformer: {
+      ...config.transformer,
+      unstable_allowRequireContext: true,
+      babelTransformerPath: require.resolve("./transformer"),
+      originalMetroConfigTransformPath
+    },
+    resolver: {
+      ...config.resolver,
+      assetExts: config.resolver.assetExts.filter((ext) => ext !== "svg"),
+      sourceExts: [...new Set([...config.resolver.sourceExts, "svg"])]
     }
-    return upstreamTransformer.transform({
-      src: await transform(src, svgrConfig),
-      filename,
-      options
-    });
-  }
-  return upstreamTransformer.transform({ src, filename, options });
+  };
 };
