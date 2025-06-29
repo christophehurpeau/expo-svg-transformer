@@ -1,3 +1,7 @@
+## v3.1.0
+
+- Support web platform for metro
+
 ## v3.0.0
 
 - Update dependencies
