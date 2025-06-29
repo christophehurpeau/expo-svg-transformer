@@ -4,6 +4,7 @@
   "description": "SVG transformer for react-native - fork of kristerkari",
   "main": "index.js",
   "repository": "https://github.com/christophehurpeau/expo-svg-transformer",
+  "packageManager": "yarn@4.9.2",
   "scripts": {
     "release": "npmpub",
     "precommit": "lint-staged",
