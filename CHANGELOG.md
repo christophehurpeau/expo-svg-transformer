@@ -1,3 +1,8 @@
+## v3.0.0
+
+- Update dependencies
+- add `withExpoSvgTransformer` helper
+
 ## v1.0.0
 
 - Breaking: drop support for `react-native` versions older than 0.59
