@@ -1,10 +1,5 @@
 const { transform } = require("@svgr/core");
 
-const defaultSVGRConfig = {
-  native: true,
-  plugins: ["@svgr/plugin-jsx"]
-};
-
 module.exports.transform = async function expoSvgTransform({
   src,
   filename,
@@ -21,6 +16,12 @@ module.exports.transform = async function expoSvgTransform({
     // let svgrConfig = config
     //  ? { ...defaultSVGRConfig, ...config }
     //  : defaultSVGRConfig;
+
+    const defaultSVGRConfig = {
+      native: options.platform !== "web",
+      plugins: ["@svgr/plugin-jsx"]
+    };
+
     let svgrConfig = defaultSVGRConfig;
     if (!filename.endsWith(".inline.svg")) {
       svgrConfig = { ...svgrConfig, exportType: "named" };
