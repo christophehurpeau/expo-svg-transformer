@@ -27,7 +27,7 @@ module.exports.transform = async function expoSvgTransform({
       svgrConfig = { ...svgrConfig, exportType: "named" };
     }
     return ogTransform({
-      src: await transform(src, svgrConfig),
+      src: await transform(src, svgrConfig, { filePath: filename }),
       filename,
       options,
       ...rest
