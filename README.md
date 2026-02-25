@@ -2,7 +2,6 @@
 
 <a href="https://facebook.github.io/react-native/"><img src="images/react-native-logo.png" width="160"></a><img src="images/plus.svg" width="100"><img src="images/svg-logo.svg" width="160">
 
-
 React Native SVG transformer allows you to import SVG files in your React Native project the same way that you would in a Web application when using a library like [SVGR](https://github.com/gregberge/svgr/tree/main/packages/webpack) to transform your imported SVG images into React components.
 
 This makes it possible to use the same code for React Native and Web.
@@ -48,7 +47,6 @@ yarn add --dev expo-svg-transformer
 
 ### Step 3: Configure the react native packager
 
-
 Merge the contents from your project's `metro.config.js` file with this config (create the file if it does not exist already).
 
 `metro.config.js`:
@@ -65,15 +63,16 @@ module.exports = withExpoSvgTransformer(config);
 If you are using TypeScript, you need to add this to your `declarations.d.ts` file (create one if you don't have one already, but don't put in the root folder of your project):
 
 ```ts
-declare module '*.svg' {
-  import * as React from 'react';
+declare module "*.svg" {
+  import * as React from "react";
 
-  export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string }>;
+  export const ReactComponent: React.FunctionComponent<
+    React.SVGProps<SVGSVGElement> & { title?: string }
+  >;
 
   const src: string;
   export default src;
 }
-
 ```
 
 ### Configuring SVGR (how SVG images get transformed)
@@ -157,7 +156,6 @@ module.exports = {
 ### Rendering custom fonts in iOS
 
 At the moment [react-native-svg](https://github.com/react-native-svg/react-native-svg#readme) does not support custom font families in iOS right out of the box. A workaround is to take your `.svg` with custom fonts and [convert it to outlines](https://www.sketch.com/docs/text/#converting-text-to-vector-shapes). This will replace `text` tags for `path` tags in your `.svg` file.
-
 
 ### Dependencies
 
